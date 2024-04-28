@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNCOe7tC1doHpGoJtKh7z7lGz7fuP4F8nfdFvAOA6Gg/z6Y5J6XqqyGXYM2ntX5" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+    <style>
+        .infobox {
+          position: relative;
+        background-color: #d87130;
+        border: 1px solid #e36414;
+        padding: 30px;
+        margin: 20px 0;
+        transition: transform 0.5s;
+        transform-style: preserve-3d;
+        cursor: pointer;
+        width: 250px;
+        height: 250px;
+        color:#fff;
+        }
+
+        .front, .back {
+          position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        backface-visibility: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        }
+
+        .front {
+            z-index: 2;
+        }
+
+        .back {
+            transform: rotateY(180deg);
+            z-index: 1;
+            background-color: #770606; 
+            padding: 15px;
+            color:#fff;
+        }
+
+        .infobox:hover {
+            background-color: #a12038;
+        }
+
+        .infobox.flipped {
+            transform: rotateY(180deg);
+        }
+        .container img{
+            max-width: 100%;
+            height:auto;
+        }
+        .featurescontainer {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            padding: 20px;
+        }
+        .fbox {
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .fbox i {
+            font-size: 4em;
+        }
+        .fbox h2 {
+            margin: 10px 0;
+            align-items: center;
+        }
+        .fbox p {
+            color: black;
+        }
+        .container {
+            user-select: none;
+            margin: 100px auto;
+            background: #fb8c2480;
+            color: #000000;
+            border-radius: 0px;
+            width: 80%;
+            padding: 40px;
+            text-align: left;
+            align-items: right;
+            box-shadow: 0 10px 20px -10px rgba(206, 150, 91, 0.789);
+        }
+        .boxfoot {
+            border: 1px solid #fff;
+            padding:15px;
+            transition: background-color 0.5s ease;
+        }
+        .boxfoot:hover{
+            background-color: #c41837;
+        }
+        .material-icons {
+            color: white;
+        }
+        .bcontainer2 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .bcontainer {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>VaxPulse</h1>
+</header>
+<div class="sidebar">
+    <a href="/" title="Home"><i class="material-icons">home</i></a>
+    <a href="/index" title="VaxPulse Finder"><i class="material-icons">lightbulb</i></a>
+    <a href="/guide" title="VaxPulse Guide"><i class="material-icons">book</i></a>
+    <a href="/privacypolicy" title="Privacy Policy"><i class="material-icons">policy</i></a>
+</div>
+<div class="sidebar-icon" id="sidebar-icon" title="Vaccine Checklist">
+    <span>💉</span>
+  </div>
+  <div id="campaign-widget" style="display: none;" title="Vaccine Checklist">
+    <h2>Are you ready to get vaccinated?</h2>
+    <ul class="checklist">
+      <li>
+        <input type="checkbox" id="checklist-item-1" />
+        <label for="checklist-item-1">Immunization Record Form</label>
+      </li>
+      <li>
+        <input type="checkbox" id="checklist-item-2" />
+        <label for="checklist-item-2">Vaccine Schedule</label>
+      </li>
+      <li>
+        <input type="checkbox" id="checklist-item-3" />
+        <label for="checklist-item-3">Travel Checklist</label>
+      </li>
+      <li>
+        <input type="checkbox" id="checklist-item-4" />
+        <label for="checklist-item-4">Appointment Record</label>
+      </li>
+      <li>
+        <input type="checkbox" id="checklist-item-5" />
+        <label for="checklist-item-5">A light meal before vaccination</label>
+      </li>
+    </ul>
+  
+  <span class="close-btn" onclick="closeCampaign()">✖️</span>
+</div>
+<section id="content">
+    <div class="container">
+        <div style="position: relative; width: 100%; padding-bottom: 56.25%; padding-top: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); margin-top: 1.6em; margin-bottom: 0.9em; overflow: hidden; border-radius: 8px; will-change: transform;">
+            <iframe loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0;margin: 0;"
+                    src="https://www.canva.com/design/DAF8k7ygLHc/u7BgLxDwolQHiDsTP8Kw8g/view?embed&amp;allowfullscreen=0" allow="fullscreen=0" allowtransparency="true" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox allow-top-navigation allow-modals" scrolling="no" seamless frameborder="0"></iframe>
+        </div>
+        <br>
+        <h2 align="center">Immunization Importance 101</h2>
+        <br>
+        <p align="center">Vaccination plays a crucial role in protecting children from various infectious diseases. </p>
+        <br>
+        <div class="bcontainer2">
+            <div class="infobox" onclick="toggleBox(this)">
+                <div class="front">
+                    <h3 align="center">Prevention of Diseases</h3>
+                </div>
+                <div class="back">
+                    <p>Vaccines help prevent potentially serious illnesses such as measles, mumps, rubella, polio, whooping cough, hepatitis, influenza, and significantly reduce their risk of contracting these diseases.</p>
+                </div>
+            </div>
+            <div class="infobox" onclick="toggleBox(this)">
+                <div class="front">
+                    <h3 align="center">Protection of Community Health</h3>
+                </div>
+                <div class="back">
+                    <p>Vaccination not only protects the vaccinated child but also helps prevent the spread of diseases within the community.</p>
+                </div>
+            </div>
+            <div class="infobox" onclick="toggleBox(this)">
+                <div class="front">
+                    <h3 align="center">Protection Against Future Health Risks</h3>
+                </div>
+                <div class="back">
+                    <p>Vaccines not only protect children from current threats but also guard against potential health risks. By vaccinating against diseases like HPV children can reduce their risk of developing cancers later in life.</p>
+                </div>
+            </div>
+            <div class="infobox" onclick="toggleBox(this)">
+                <div class="front">
+                    <h3 align="center">Reduced Severity of Illness</h3>
+                </div>
+                <div class="back">
+                    <p>Vaccines can help mitigate symptoms and prevent complications, leading to shorter recovery times and fewer hospitalizations.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+<footer>
+    <div class="footer-container">
+        <div class="footer-column useful-links">
+            <ul>
+                <li><h3>Useful Links</h3></li>
+                <br>
+                <li><a href="/about" style="color:ghostwhite">About Us</a></li>
+                <li><a href="/index" style="color:ghostwhite">Our Services</a></li>
+                <li><a href="/guide#faq-container" style="color:ghostwhite">FAQs</a></li>
+            </ul>
+        </div>
+        <div class="footer-column subscribe">
+            <h3>Subscribe with Us</h3>
+            <br>
+            <p>Get notified about vaccination updates and news:</p>
+            <br>
+            <form method="post" id="vaccineForm" action="{{ url_for('subscriber')}}">
+                <input type="email" id="email" name="email" placeholder="Enter your email"> <!-- Added name attribute -->
+                <button type="submit">Subscribe</button>
+            </form>
+            {% if message %}
+            <p> {{ message }} </p>
+            {%  endif %} 
+        </div>
+        <div class="footer-column keep-in-touch">
+            <h3>Keep in Touch</h3>
+            <br>
+            <address>
+                Address: Basvanagudi, Bangalore, Karnataka 560004<br>
+                Phone: (111) 111-1111<br>
+                Email: <a href="mailto:vaxpulse@outlook.com">vaxpulse@outlook.com</a>
+            </address>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <a href="https://github.com/Stu-03/FWD"><i class="material-icons">code</i></a>
+        <p>&copy; 2024 VaxPulse. All Rights Reserved.</p>
+    </div>
+</footer>
+<script>
+    function openCampaign() {
+        document.getElementById("campaign-widget").style.display = "block";
+    }
+    function closeCampaign() {
+        document.getElementById("campaign-widget").style.display = "none";
+    }
+    document.getElementById("sidebar-icon").addEventListener("click", openCampaign);
+    function downloadSchedule() {
+        window.open('https://www.canva.com/design/DAF9D6OBRIk/vrWuhV2fBaKWPclLhzL6MA/view?utm_content=DAF9D6OBRIk&utm_campaign=designshare&utm_medium=link&utm_source=editor', '_blank');
+    }
+    function toggleBox(infobox) {
+        infobox.classList.toggle('flipped');
+    }
+</script>
+</body>
+</html>

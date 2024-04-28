@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VaxPulse Guide</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet"="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNCOe7tC1doHpGoJtKh7z7lGz7fuP4F8nfdFvAOA6Gg/z6Y5J6XqqyGXYM2ntX5" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+    <style>
+        .hover-container {
+  transition: background-color 0.3s ease;
+}
+
+.hover-container:hover {
+  background-color: #f27f149d; }
+.container {
+  user-select: none;
+  margin: 100px auto;
+  background: #fb8c2480;
+  color: #000000;
+  border-radius: 0px;
+  width: 80%;
+  padding: 40px;
+  text-align: left;
+  align-items: right;
+  box-shadow: 0 10px 20px -10px rgba(206, 150, 91, 0.789);
+}
+
+.bcontainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.box {
+    position: relative;
+  background-color: #d87130;
+  border: 1px solid #d87130;
+  padding: 30px;
+  padding-left: 30px;
+  padding-right: 30px; 
+  height: 200px; 
+  margin: 5px 0 5px 0;
+  transition: transform 0.5s;
+  transform-style: preserve-3d;
+  cursor: pointer;
+  text-align: center;
+
+}
+
+.front, .back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    backface-visibility: hidden;
+}
+
+.front {
+    z-index: 2;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding-left: 20px;
+    padding-right: 20px;
+    backface-visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.back {
+    transform: rotateY(180deg);
+    z-index: 1;
+    background-color: #e0506b;
+    padding: 30px;
+    padding-left: 20px;
+    padding-right: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+.box:hover {
+    background-color: #a12038;
+}
+
+.box.flipped {
+    transform: rotateY(180deg);
+}
+.box h3{
+  color:#fff;
+  font-size: 20px;
+  font-weight: normal;
+  text-align: center;
+}
+.box p{
+  color:#ffffff;
+  text-align: left;
+
+}
+</style>
+</head>
+
+<body>
+    <header>
+        <h1>VaxPulse Guide</h1>
+    </header>
+    <div class="sidebar">
+        <a href="/" title="Home"><i class="material-icons">home</i></a>
+        <a href="/index" title="VaxPulse Finder"><i class="material-icons">lightbulb</i></a>
+        <a href="/about" title="Immunization 101"><i class="material-icons">help</i></a>
+        <a href="/privacypolicy" title="Privacy Policy"><i class="material-icons">policy</i></a>
+      </div>
+      <div class="sidebar-icon" id="sidebar-icon" title="Vaccine Checklist">
+        <span>💉</span>
+      </div>
+      <div id="campaign-widget" style="display: none;" title="Vaccine Checklist">
+        <h2>Are you ready to get vaccinated?</h2>
+        <ul class="checklist">
+          <li>
+            <input type="checkbox" id="checklist-item-1" />
+            <label for="checklist-item-1">Immunization Record Form</label>
+          </li>
+          <li>
+            <input type="checkbox" id="checklist-item-2" />
+            <label for="checklist-item-2">Vaccine Schedule</label>
+          </li>
+          <li>
+            <input type="checkbox" id="checklist-item-3" />
+            <label for="checklist-item-3">Travel Checklist</label>
+          </li>
+          <li>
+            <input type="checkbox" id="checklist-item-4" />
+            <label for="checklist-item-4">Appointment Record</label>
+          </li>
+          <li>
+            <input type="checkbox" id="checklist-item-5" />
+            <label for="checklist-item-5">A light meal before vaccination</label>
+          </li>
+        </ul>
+      
+      <span class="close-btn" onclick="closeCampaign()">✖️</span>
+    </div>
+    <div class="content">
+    <div class = "container" id="container">
+        <h2>Vaccine Information</h2>
+        <br>
+        <p>
+            This is a reference for vaccine which contains information about different types of vaccines.Vaccines typically involve multiple doses to ensure adequate immune response, often administered in a primary series followed by booster shots.
+            Primary doses initiate the immune system's recognition of the pathogen, while boosters enhance and prolong immunity over time.
+            Timing and intervals between doses are crucial for optimizing vaccine efficacy and achieving robust and lasting protection against infectious diseases.
+        </p>
+        <br>
+        <div class="bcontainer">
+            <div class="box" style="padding: 0px; position: relative; border: 1px solid #d87130; height: 260px; width: 330px; margin: 5px 0 5px 0; transition: transform 0.5s; transform-style: preserve-3d; cursor: pointer; text-align: center; overflow: hidden;">
+                <img src="/static/gif1.gif" alt="Your GIF" style="width: 100%; height: 100%;">
+            </div>
+            <div class="box" onclick="toggleBox(this)">
+                <div class="front">
+                    <h3>Influenza</h3>
+                </div>
+                <div class="back">
+                    <br>
+                    <p>Injection Site: deltoid muscle of the upper arm.</p>
+                    <p>Dosage: 0.5 milliliters</p>
+                    <p>Booster: Single dose</p>
+                    <p>Age: 6 months and older</p>
+                </div>
+            </div>
+            <div class="box" style="padding: 0px; position: relative; border: 1px solid #d87130; height: 260px; width: 330px; margin: 5px 0 5px 0; transition: transform 0.5s; transform-style: preserve-3d; cursor: pointer; text-align: center; overflow: hidden;">
+                <img src="/static/gif2.gif" alt="Your GIF" style="width: 100%; height: 100%;">
+        </div>
+            <div class="box" onclick="toggleBox(this)">
+                <div class="front">
+                    <h3>MenACWY</h3>
+                </div>
+                <div class="back">
+                    <br>
+                    <p>Injection Site: Thigh</p>
+                    <p>Dosage: 0.5 milliliters</p>
+                    <p>Booster: 16 years old</p>
+                    <p>Age: 11-12 years old</p>
+                </div>
+            </div>   
+            <div class="box" onclick="toggleBox(this)">
+                <div class="front">
+                  <h3>MenB(meningococcal B)</h3>
+                </div>
+                <div class="back">
+                  <br>
+                  <p>Injection Site: deltoid muscle of the upper arm.</p>
+                  <p>Dosage: Multiple</p>
+                  <p>Booster: Multiple</p>
+                  <p>Age: adolescents and young adults</p>
+                </div>
+              </div>
+              
+              <div class="box" onclick="toggleBox(this)">
+                <div class="front">
+                  <h3>RSV</h3>
+                </div>
+                <div class="back">
+                  <br>
+                  <p>Injection Site: intramuscular injection.</p>
+                  <p>Dosage: 2</p>
+                  <p>Booster: At certain high-risk groups or individuals.</p>
+                  <p>Age: infants and young children</p>
+                </div>
+              </div>
+              <div class="box" onclick="toggleBox(this)">
+                <div class="front">
+                    <h3>MenABCWY(meningococcal serogroups A, B, C, W, and Y)</h3>
+                </div>
+                <div class="back">
+                    <br>
+                    <p>Injection Site: intramuscular injection, commonly in the upper arm.</p>
+                    <p>Dosage: multiple</p>
+                    <p>Booster: multiple</p>
+                    <p>Age: adolescents and young adults</p>
+                </div>      
+            </div>
+            
+            <div class="box" onclick="toggleBox(this)">
+                <div class="front">
+                    <h3>HPV(Human Papillomavirus Vaccination):</h3>
+                </div>
+                <div class="back">
+                    <br>
+                    <p>Injection Site: upper arm or thigh.</p>
+                    <p>Dosage: single dose</p>
+                    <p>Booster: two or three doses after single dose</p>
+                    <p>Age: 11 or 12 years old</p>
+                </div>      
+            </div>
+            
+            <div class="box" onclick="toggleBox(this)">
+                <div class="front">
+                    <h3>Tdap (tetanus, diphtheria, and pertussis (whooping cough))</h3>
+                </div>
+                <div class="back">
+                    <br>
+                    <p>Injection Site: deltoid muscle of the upper arm.</p>
+                    <p>Dosage: initially 1</p>
+                    <p>Booster: every 10 years after the initial dose.</p>
+                    <p>Age: during pregnancy usually 27 and 36 weeks of gestation.</p>
+                </div>      
+            </div>
+            
+            <div class="box" onclick="toggleBox(this)">
+                <div class="front">
+                    <h3>DTP (Diphtheria, Tetanus, Pertussis)</h3>
+                </div>
+                <div class="back">
+                    <br>
+                    <p>Injection Site: Infants: Thigh muscle Older Children and Adults: Upper arm muscle (deltoid)</p>
+                    <p>Dosage: 2</p>
+                    <p>Booster: during adolescence and adulthood</p>
+                    <p>Age: 11-12 years.</p>
+                </div>
+            </div>
+            
+            <div class="box" onclick="toggleBox(this)">
+                <div class="front">
+                    <h3>Polio</h3>
+                </div>
+                <div class="back">
+                    <br>
+                    <p>Injection Site: deltoid muscle of the upper arm for adults.</p>
+                    <p>Dosage: 2</p>
+                    <p>Booster: 10 years</p>
+                    <p>Age: 2 months, 4 months, 6-18 months, and 4-6 years old.</p>
+                </div>
+            </div>
+            
+            <div class="box" onclick="toggleBox(this)">
+                <div class="front">
+                    <h3>Hepatitis-B</h3>
+                </div>
+                <div class="back">
+                    <br>
+                    <p>Injection Site: deltoid muscle of the upper arm or the anterolateral thigh muscle.</p>
+                    <p>Dosage: 2</p>
+                    <p>Booster: 5, 10, or 20 years</p>
+                    <p>Age: any age, from infants to older adults</p>
+                </div>        
+            </div>
+            
+            <div class="box" onclick="toggleBox(this)">
+                <div class="front">
+                    <h3>Rotavirus</h3>
+                </div>
+                <div class="back">
+                    <br>
+                    <p>Injection Site: administered orally, as drops</p>
+                    <p>Dosage: 2</p>
+                    <p>Booster: not typically needed during childhood.</p>
+                    <p>Age: around 2 months of age</p>
+                </div>
+            </div>
+            
+            <div class="box" onclick="toggleBox(this)">
+                <div class="front">
+                    <h3>Varicella</h3>
+                </div>
+                <div class="back">
+                    <br>
+                    <p>Injection Site: injection into the muscle, often in the upper arm (deltoid muscle) for adults and older children, or in the thigh for infants and younger children.</p>
+                    <p>Dosage: single-dose injection</p>
+                    <p>Booster: second dose is given at 4-6 years of age</p>
+                    <p>Age: 12-15 months of age</p>
+                </div>
+            </div>
+            <div class="box" onclick="toggleBox(this)">
+                <div class="front">
+                    <h3>MMR</h3>
+                </div>
+                <div class="back">
+                    <br>
+                    <p>Injection Site: injection at the upper arm or thigh</p>
+                    <p>Dosage: 0.5 mL</p>
+                    <p>Booster: second dose is given at 4-6 years of age</p>
+                    <p>Age: around 12-15 months of age</p>
+                </div>
+            </div>
+        </div>
+
+        <br>
+        <h2 align="center">Frequently Asked Questions:</h2>
+        <br>
+        <div class="faqgrid-container" id="faq-container">
+            <div class="faq-container" id="faqContainer1">
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleAnswer(this)">How does this website help me?</button>
+                    <div class="faq-answer">We provide essential vaccination and immunization details to make your immunization journey smoother! You can enter your age, to find a personalized schedule of vaccines, complete with due dates along with a locator feature, to find hospitals near you.</div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleAnswer(this)">What locations can I search for?</button>
+                    <div class="faq-answer">Currently we allow for all locations within Bangalore Urban, we hope to expand our reach in the future.</div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleAnswer(this)">What is the range of ages that I can search for?</button>
+                    <div class="faq-answer">Expect vaccines for ages from 0 to 18, we have also provided a table, for the foundational months from 0 to 1 year</div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleAnswer(this)">What are the different types of vaccination?</button>
+                    <div class="faq-answer"> Inactivated vaccines, Attenuated vaccines, particle vaccines and subunit vaccines use killed virus or bacteria to trigger an immune response.</div>
+            </div>                     
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleAnswer(this)">What are vaccine ingredients?</button>
+                <div class="faq-answer">Vaccine ingredients vary depending on the type of vaccine but commonly include antigens (weakened or inactivated viruses or bacteria), adjuvants, 
+                    stabilizers, preservatives, and traces of culture media used in production.</div>
+            </div>
+            </div>
+        
+            <div class="faq-container" id="faqContainer2">
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleAnswer(this)">How long does vaccine immunity last?</button>
+                    <div class="faq-answer">The duration of vaccine-induced immunity varies depending on the vaccine and individual factors. Some vaccines provide lifelong immunity, 
+                        while others may require booster doses to maintain protection.</div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleAnswer(this)">What should I do if I miss a vaccine dose?</button>
+                    <div class="faq-answer">If you miss a vaccine dose, consult with your healthcare provider or vaccination clinic for guidance on the appropriate course of action. 
+                        Depending on the vaccine, a catch-up schedule may be recommended.</div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleAnswer(this)">Can I get vaccinated if I have a cold or mild illness?</button>
+                    <div class="faq-answer">In most cases, mild illness, such as a cold, does not preclude vaccination. However, individuals with moderate to severe 
+                        illness may need to delay vaccination until they recover.</div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleAnswer(this)">Are vaccines safe?</button>
+                    <div class="faq-answer">Yes, vaccines undergo rigorous testing for safety and efficacy before approval by regulatory agencies. Common side effects are usually mild and temporary, 
+                        such as soreness at the injection site or low-grade fever.</div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleAnswer(this)">Do vaccines provide immediate protection?</button>
+                    <div class="faq-answer">While some vaccines provide immediate protection, others may require multiple doses to build immunity. 
+                        It's essential to follow the recommended vaccination schedule.</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+    </div>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}">
+        function toggleAnswer(button) {
+    var answer = button.nextElementSibling;
+    answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
+}
+    </script>
+   <footer>
+    <div class="footer-container">
+      <div class="footer-column useful-links">
+        <ul>
+          <li><h3>Useful Links</h3></li>
+          <br>
+          <li><a href="/about" style="color:ghostwhite">About Us</a></li>
+          <li><a href="/index" style="color:ghostwhite">Our Services</a></li>
+          <li><a href="/guide#faq-container" style="color:ghostwhite">FAQs</a></li>
+        </ul>
+      </div>
+      <div class="footer-column subscribe">
+        <h3>Subscribe with Us</h3>
+        <br>
+        <p>Get notified about vaccination updates and news:</p>
+        <br>
+        <form method="post" id="vaccineForm" action="{{ url_for('subscriber')}}">
+          <input type="email" id="email" name="email" placeholder="Enter your email">
+          <button type="submit">Subscribe</button>
+      </form>
+      {% if message %}
+      <p> {{ message }} </p>
+      {%  endif %} 
+      </div>
+      <div class="footer-column keep-in-touch">
+        <h3>Keep in Touch</h3>
+        <br>
+        <address>
+          Address: Basvanagudi, Bangalore, Karnataka 560004<br>
+          Phone: (111) 111-1111<br>
+          Email: <a href="mailto:vaxpulse@outlook.com">vaxpulse@outlook.com</a>
+        </address>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <a href="https://github.com/Stu-03/VaxPulse"><i class="material-icons">code</i></a>
+      <p>&copy; 2024 VaxPulse. All Rights Reserved.</p>
+    </div>
+  </footer>
+  <script>
+    function openCampaign() {
+            document.getElementById("campaign-widget").style.display = "block";
+          }
+          function closeCampaign() {
+            document.getElementById("campaign-widget").style.display = "none";
+          }
+          function toggleBox(box) {
+    box.classList.toggle('flipped');
+}
+          document.getElementById("sidebar-icon").addEventListener("click", openCampaign);
+  </script>
+</body>
+
+</html>

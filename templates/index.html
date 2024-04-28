@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VaxPulse Finder</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet"="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNCOe7tC1doHpGoJtKh7z7lGz7fuP4F8nfdFvAOA6Gg/z6Y5J6XqqyGXYM2ntX5" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+    <style>
+        .material-symbols-outlined {
+          font-variation-settings:
+          'FILL' 1,
+          'wght' 700,
+          'GRAD' 0,
+          'opsz' 24
+        }
+        img.right-float {
+           float: right;
+           margin: 0 0 10px 10px;
+           max-width: 100%;
+           width: 400px;
+    }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>VaxPulse Finder</h1>
+    </header>
+    <div class="sidebar">
+        <a href="/" title="Home"><i class="material-icons">home</i></a>
+        <a href="/about" title="Immunization 101"><i class="material-icons">help</i></a>
+        <a href="/guide" title="VaxPulse Guide"><i class="material-icons">book</i></a>
+        <a href="/privacypolicy" title="Privacy Policy"><i class="material-icons">policy</i></a>
+      </div>
+      <div class="sidebar-icon" id="sidebar-icon" title="Vaccine Checklist">
+        <span>💉</span>
+      </div>
+    <div id="campaign-widget" style="display: none;">
+    <h2>Are you ready to get vaccinated?</h2>
+    <ul class="checklist">
+      <li>
+        <input type="checkbox" id="checklist-item-1" />
+        <label for="checklist-item-1">Immunization Record Form</label>
+      </li>
+      <li>
+        <input type="checkbox" id="checklist-item-2" />
+        <label for="checklist-item-2">Vaccine Schedule</label>
+      </li>
+      <li>
+        <input type="checkbox" id="checklist-item-3" />
+        <label for="checklist-item-3">Travel Checklist</label>
+      </li>
+      <li>
+        <input type="checkbox" id="checklist-item-4" />
+        <label for="checklist-item-4">Appointment Record</label>
+      </li>
+      <li>
+        <input type="checkbox" id="checklist-item-5" />
+        <label for="checklist-item-5">A light meal before vaccination</label>
+      </li>
+    </ul>
+  <span class="close-btn" onclick="closeCampaign()">✖️</span>
+</div>
+  <div id="widget-container">
+    <div id="widget-header">
+        Health Today
+    </div>
+    <div id="widget-body">
+        Loading...
+    </div>
+</div>
+    <section id="content" class="no-gutters">
+    <div class="container">
+        <h2>Our Intent:</h2>
+    </br>
+        <p>
+            <img class="right-float" src="/static/vax chart.png" alt="Description of the image">
+            Welcome to the VaxPulse Finder – your go-to resource for efficient, accessible, and quick results for vaccination related data. Our user-friendly platform provides a simplistic list of the recommended immunization for kids aged 0-18, and allows you to search the nearest hospital, making the entire process seamless. Explore the latest immunization trends and access vital statistics with just a click in our information page. For the first 12 months, we've provided a self explanatory chart showing the recommended vaccines. Your health, simplified and prioritized.
+        </p>
+    </br>
+        <h2>Immunization Tracking</h2>
+        <br>
+        <form method="post" id="vaccineForm" action="{{ url_for('process_form') }}" onsubmit="return validateForm()">
+          <label for="name">Enter Your Name:</label>
+          <input type="text" id="name" name="name" required><br>
+          <label for="dob">Enter Date of Birth:</label>
+          <input type="date" id="dob" name="dob" required>
+          <br>
+          <button type="submit" name="button1">Get Current VaxDetails</button>
+          <button type="submit" name="button2">Get Schedule</button>
+      </form>
+        <br>
+        <div id="vaccine-info">
+          {% if vaccine_row %}
+            <p>Current Vaccines : {{ vaccine_row.vaccines }}</p>
+          {% endif %}
+        </div>
+        {% if dob %}
+        <h3>Name: {{ name }}</h3>
+        <h3>Age: {{ age }}</h3>
+        <h3>Vaccines Completed</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Age</th>
+                    <th>Vaccine Name</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for vaccine in vaccine_schedule1 %}
+                <tr>
+                    <td>{{ vaccine['Age'] }}</td>
+                    <td>{{ vaccine['Vaccine'] }}</td>
+                    <td>{{ vaccine['Date'] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <br>
+        <h3>Remaining Vaccines</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Age</th>
+                    <th>Vaccine Name</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for vaccine in vaccine_schedule2 %}
+                <tr>
+                    <td>{{ vaccine['Age'] }}</td>
+                    <td>{{ vaccine['Vaccine'] }}</td>
+                    <td>{{ vaccine['Date'] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+    </br>
+    <button type="button" onclick="printTableAndName()">Print Schedule</button>
+<p>Unsure about vaccine dosage? Need a bit of immunization info? Unlock the Power of Protection: Click on the book icon to find out more!</p>
+        <h2>Hospital Finder</h2>
+</br>
+<p>Utilize our robust hospital finder by entering a location within Bangalore Urban to find your nearest hospital. </p>
+</br>
+<p><iframe src='https://batchgeo.com/map/90e12edcd7e87dcd3c16d304e487d796' frameborder='0' width='100%' height='550' sandbox='allow-top-navigation allow-scripts allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-modals allow-forms' allow='geolocation https://batchgeo.com' style='border:1px solid #aaa; position: relative;' scrolling='no'></iframe></p><p><small><a href='https://batchgeo.com/map/90e12edcd7e87dcd3c16d304e487d796'>Hospitals in Bangalore</a></small></p>
+</section>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+<footer>
+        <div class="footer-container">
+          <div class="footer-column useful-links">
+            <ul>
+              <li><h3>Useful Links</h3></li>
+              <br>
+              <li><a href="/about" style="color:ghostwhite">About Us</a></li>
+              <li><a href="/index" style="color:ghostwhite">Our Services</a></li>
+              <li><a href="/guide#faq-container" style="color:ghostwhite">FAQs</a></li>
+            </ul>
+          </div>
+          <div class="footer-column subscribe">
+            <h3>Subscribe with Us</h3>
+            <br>
+            <p>Get notified about vaccination updates and news:</p>
+            <br>
+            <form method="post" id="vaccineForm" action="{{ url_for('subscriber')}}">
+              <input type="email" id="email" name="email" placeholder="Enter your email"> <!-- Added name attribute -->
+              <button type="submit">Subscribe</button>
+              {% if message %}
+              <p> {{ message }} </p>
+              {%  endif %} 
+          </form>
+          </div>
+          <div class="footer-column keep-in-touch">
+            <h3>Keep in Touch</h3>
+            <br>
+            <address>
+              Address: Basvanagudi, Bangalore, Karnataka 560004<br>
+              Phone: (111) 111-1111<br>
+              Email: <a href="mailto:vaxpulse@outlook.com">vaxpulse@outlook.com</a>
+            </address>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <a href="https://github.com/Stu-03/VaxPulse"><i class="material-icons">code</i></a>
+          <p>&copy; 2024 VaxPulse. All Rights Reserved.</p>
+        </div>
+</footer>
+<script>
+        function openCampaign() {
+          document.getElementById("campaign-widget").style.display = "block";
+        }
+        function closeCampaign() {
+          document.getElementById("campaign-widget").style.display = "none";
+        }
+        document.getElementById("sidebar-icon").addEventListener("click", openCampaign);
+        function printTableAndName() {
+          var table1 = document.querySelector('table:nth-of-type(1)');
+          var table2 = document.querySelector('table:nth-of-type(2)')
+          var name = document.querySelector('h3').innerText;
+          var printWindow = window.open('', '_blank');
+          printWindow.document.write('<html><head><title>Schedule</title><style>table { border-collapse: collapse; width: 100%; } th, td { border: 1px solid black; padding: 8px; text-align: left; } th { background-color: #f2f2f2; }</style></head><body><h1 align="center">VaxPulse Schedule</h1><br>');
+          printWindow.document.write(name);
+          printWindow.document.write('<br><h2>Vaccines Completed</h2>');
+          printWindow.document.write(table1.outerHTML);
+          printWindow.document.write('<br><h2>Vaccines Pending</h2>');
+          printWindow.document.write(table2.outerHTML);
+          printWindow.document.write('<br><p>To a successful vaccination!<p></body></html>');
+          printWindow.document.close();
+          printWindow.print();
+        }
+</script>
+</body>
+</html>
+
